@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace MapDownloader
 {
@@ -17,7 +18,17 @@ namespace MapDownloader
             var client = new WebClient();
             var setId = LinkManagement.GetSetId(link);
             var fileName = LinkManagement.GetFileName(link);
-            client.DownloadFile(new Uri("https://chimu.moe/d/" + setId), @"C:\Windows\Temp\" + fileName);
+
+            try
+            {
+                client.DownloadFile(new Uri("https://chimu.moe/d/" + setId), @"C:\Windows\Temp\" + fileName);
+            }
+            
+            catch (WebException)
+            {
+                Process.Start(DbReader.OsuPathKey.GetValue("BrowserPath").ToString(), link);
+                Environment.Exit(0);
+            }
         }
     }
 }

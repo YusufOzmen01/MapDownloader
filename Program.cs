@@ -38,7 +38,7 @@ namespace MapDownloader
             if (args.Length == 0 || RegistryManagement.IsAdministrator() || !BrowserManagement.IsSet())
             {
                 MessageBox.Show("Run the program as administrator for the initial setup.");
-                return; 
+                return;
             }
 
             foreach (string arg in args)
@@ -64,7 +64,7 @@ namespace MapDownloader
 
                     Process.Start(@"C:\Windows\Temp\" + LinkManagement.GetFileName(arg));
 
-                        return;
+                    return;
                 }
                 Process.Start(DbReader.OsuPathKey.GetValue("BrowserPath").ToString(), arg);
             }

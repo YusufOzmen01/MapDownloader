@@ -98,6 +98,7 @@ namespace MapDownloader
     {
         public string ParentSetId { get; set; }
         public string FileMD5 { get; set; }
+        public string error_code { get; set; }
     }
     
     class ChimuSetJSON
