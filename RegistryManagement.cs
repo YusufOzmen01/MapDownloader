@@ -16,6 +16,7 @@ namespace MapDownloader
         {
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
+
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
@@ -49,8 +50,7 @@ namespace MapDownloader
 
         public static bool Exists()
         {
-            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\MapDownloader\Capabilities", ".http", null) != null) return true;
-            else return false;
+            return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\MapDownloader\Capabilities", ".http", null) != null;
         }
     }
 }

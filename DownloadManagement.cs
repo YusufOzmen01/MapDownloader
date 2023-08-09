@@ -27,6 +27,7 @@ namespace MapDownloader
             catch (WebException)
             {
                 Process.Start(DbReader.OsuPathKey.GetValue("BrowserPath").ToString(), link);
+                
                 Environment.Exit(0);
             }
         }

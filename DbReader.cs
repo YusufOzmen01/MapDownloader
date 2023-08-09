@@ -17,9 +17,10 @@ namespace MapDownloader
         {
             var dbPath = OsuPathKey.GetValue("osuPath").ToString();
             var osuDb = File.ReadAllBytes(dbPath + @"\osu!.db");
-            Console.WriteLine(dbPath);
+
             var osuDbStr = Encoding.UTF8.GetString(osuDb);
             var fileHash = LinkManagement.GetFileHash(link);
+
             return osuDbStr.Contains(fileHash + "\v");
         }
 
@@ -29,6 +30,7 @@ namespace MapDownloader
             {
                 fbd.Description = "Choose your osu! folder.";
                 string osuPath;
+                
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
                     osuPath = fbd.SelectedPath;

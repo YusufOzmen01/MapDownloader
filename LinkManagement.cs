@@ -13,40 +13,28 @@ namespace MapDownloader
 
         public static bool IsMapLink(string link)
         {
-            if (link.Contains("https://osu.ppy.sh/") || link.Contains("https://osu.ppy.sh/"))
-            {
-                if (link.Contains("/beatmaps/")) return true;
-                else return false;
-
-            }
-            else return false;
+            // MATCH WITH REGEX https?:\/\/osu\.ppy\.sh\/beatmaps\/\d+
+            // THEN RETURN TRUE IF IT MATCHES WITH ANYTHING
         }
 
         public static string GetSetId(string link)
         {
-            string id = "";
-            foreach (char c in link)
-            {
-                if (char.IsNumber(c))
-                {
-                    id += c;
-                }
-            }
+            /*
+                import requests
+                import re 
 
-            try
-            {
-                var wc = new WebClient();
+                def get_set_id(url):
+                    res = requests.head(url, allow_redirects=True)
 
-                string chimuResponse = wc.DownloadString("https://api.chimu.moe/v1/map/" + id);
+                    if res.status_code < 200 or res.status_code >= 400:
+                        return None
+                    else:
+                        return re.search("[0-9]+", res.request.url)[0]
 
-                ChimuDiffJSON m = JsonConvert.DeserializeObject<ChimuDiffJSON>(chimuResponse);
+                get_set_id("https://osu.ppy.sh/beatmapsets/1")
+            */
 
-                return m.ParentSetId;
-            }
-            catch (WebException)
-            {
-                return null;
-            }
+            // IMPLEMENT THIS IN C#
         }
 
         public static string GetFileName(string link)

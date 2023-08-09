@@ -32,12 +32,14 @@ namespace MapDownloader
                 BrowserManagement.SetBrowser();
                 MessageBox.Show("And on this step, choose your osu! folder.");
                 DbReader.SetOsuPath();
+
                 return;
             }
 
             if (args.Length == 0 || RegistryManagement.IsAdministrator() || !BrowserManagement.IsSet())
             {
                 MessageBox.Show("Run the program as administrator for the initial setup.");
+
                 return;
             }
 
@@ -47,25 +49,26 @@ namespace MapDownloader
                 if (!LinkManagement.IsMapLink(arg))
                 {
                     Process.Start(DbReader.OsuPathKey.GetValue("BrowserPath").ToString(), arg);
-                    return;
 
+                    return;
                 }
 
                 if (LinkManagement.GetSetId(arg) == null)
                 {
                     MessageBox.Show("The map couldn't be found on chimu.moe.");
                     Process.Start(DbReader.OsuPathKey.GetValue("BrowserPath").ToString(), arg);
+
                     return;
                 }
 
                 if (!DbReader.IsDownloaded(arg))
                 {
                     DownloadManagement.DownloadMap(arg);
-
                     Process.Start(@"C:\Windows\Temp\" + LinkManagement.GetFileName(arg));
 
                     return;
                 }
+
                 Process.Start(DbReader.OsuPathKey.GetValue("BrowserPath").ToString(), arg);
             }
         }
